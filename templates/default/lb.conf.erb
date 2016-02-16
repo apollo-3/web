@@ -1,0 +1,13 @@
+upstream tomcat {
+    <% @servers.each do |server| -%>
+    <%= "server #{server}:8080;" %>
+    <% end -%>
+}
+
+server {
+    listen 80;
+
+    location / {
+        proxy_pass http://tomcat;
+    }
+}
